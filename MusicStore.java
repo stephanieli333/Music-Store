@@ -2,15 +2,12 @@
 import java.util.ArrayList;
 
 public class MusicStore {
-    //ADD YOUR CODE BELOW HERE
     private ArrayList<Song> songs;
     private MyHashTable<String, Song> htSong; 
     private MyHashTable<String, ArrayList<Song>> htArtist; 
     private MyHashTable<Integer, ArrayList<Song>> htYear; 
-    //ADD YOUR CODE ABOVE HERE
     
     public MusicStore(ArrayList<Song> songs) {
-        //ADD YOUR CODE BELOW HERE
     	this.songs = new ArrayList<Song>();
         htSong = new MyHashTable<String,Song>(songs.size()*2);
         htArtist = new MyHashTable<String,ArrayList<Song>>(songs.size()*2);
@@ -19,7 +16,6 @@ public class MusicStore {
         for(Song song:songs) {
         	this.addSong(song);
         }
-        //ADD YOUR CODE ABOVE HERE
     }
     
     
@@ -27,7 +23,6 @@ public class MusicStore {
      * Add Song s to this MusicStore
      */
     public void addSong(Song s) {
-        // ADD CODE BELOW HERE
         songs.add(s);
         htSong.put(s.getTitle(), s);
         if(this.htArtist.get(s.getArtist())!=null) {
@@ -46,7 +41,6 @@ public class MusicStore {
     		titles.add(s);
     		htYear.put(s.getYear(), titles);
     	}
-        // ADD CODE ABOVE HERE
     }
     
     /**
@@ -54,9 +48,7 @@ public class MusicStore {
      * by that title 
      */
     public Song searchByTitle(String title) {
-        //ADD CODE BELOW HERE
     	return this.htSong.get(title);
-        //ADD CODE ABOVE HERE
     }
     
     /**
@@ -64,12 +56,10 @@ public class MusicStore {
      * ArrayList of all such Songs.
      */
     public ArrayList<Song> searchByArtist(String artist) {
-        //ADD CODE BELOW HERE
     	if(this.htArtist.get(artist)!=null) {
     		return this.htArtist.get(artist);
     	}
     	return new ArrayList<Song>();
-        //ADD CODE ABOVE HERE
     }
     
     /**
@@ -77,12 +67,9 @@ public class MusicStore {
      *  and return an ArrayList of all such  Songs  
      */
     public ArrayList<Song> searchByYear(Integer year) {
-        //ADD CODE BELOW HERE
     	if(this.htYear.get(year) != null) {
     		return this.htYear.get(year);
     	}
-    	return new ArrayList<Song>();
-        //ADD CODE ABOVE HERE
-        
+    	return new ArrayList<Song>();    
     }
 }

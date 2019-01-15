@@ -22,6 +22,7 @@ public class MyHashTable<K,V> implements Iterable<HashPair<K,V>>{
         	throw new IllegalArgumentException("capacity must be >=0");
         }
         this.buckets = new ArrayList<LinkedList<HashPair<K,V>>>(initialCapacity);
+	   // initializes buckets with empty linked lists
         for(int i = 0; i<initialCapacity; i++) {
         	this.buckets.add(new LinkedList<HashPair<K,V>>());
         }
@@ -36,7 +37,7 @@ public class MyHashTable<K,V> implements Iterable<HashPair<K,V>>{
     }
     
     /**
-     * Returns the buckets vairable. Usefull for testing  purposes.
+     * Returns the buckets vairable. Useful for testing  purposes.
      */
     public ArrayList<LinkedList< HashPair<K,V> > > getBuckets(){
         return this.buckets;
@@ -117,7 +118,6 @@ public class MyHashTable<K,V> implements Iterable<HashPair<K,V>>{
     
     // Method to double the size of the hashtable if load factor increases
     // beyond MAX_LOAD_FACTOR.
-    // Made public for ease of testing.
     
     public void rehash() {
     	MyHashTable<K,V> temp = new MyHashTable<K,V>(2*this.numBuckets);
@@ -154,6 +154,9 @@ public class MyHashTable<K,V> implements Iterable<HashPair<K,V>>{
      * Expected average runtime is O(n)
      */
     public ArrayList<V> values() {
+	    // inputs each retrieved value into a new hashtable
+	    // only puts the value in if the slot is null AND adds it to the ArrayList, which will be returned at the end
+	    // else, the value already exists and should not be added to the ArrayList
         ArrayList<V> list = new ArrayList<V>(this.numEntries);
         MyHashTable<V,Integer> table = new MyHashTable<V,Integer>(this.numBuckets);
         for(LinkedList<HashPair<K,V>> l:this.buckets) {
@@ -163,8 +166,7 @@ public class MyHashTable<K,V> implements Iterable<HashPair<K,V>>{
     				list.add(pair.getValue());
     			}
     		}
-    	}
-        
+    	} 
         return list;
     }
     
